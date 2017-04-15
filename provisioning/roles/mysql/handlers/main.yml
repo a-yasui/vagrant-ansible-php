@@ -1,0 +1,3 @@
+- name: restart mysqld
+  become: yes
+  service: name=mysqld state=restarted

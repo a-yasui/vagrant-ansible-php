@@ -1,0 +1,5 @@
+---
+# vars file for mysql
+mysqlserver:
+  root_password: root
+  defaults_file: /root/.my.cnf

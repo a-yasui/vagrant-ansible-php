@@ -1,0 +1,13 @@
+- name: Install Nginx
+  become: yes
+  apt: pkg=nginx state=latest
+
+- name: Copy nginx default configuration
+  become: yes
+  template: >
+    src=sites_available_default.j2
+    dest=/etc/nginx/sites-available/default
+    owner=root
+    group=root
+    mode=0644
+  notify: restart nginx

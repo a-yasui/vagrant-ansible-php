@@ -1,0 +1,18 @@
+---
+- hosts: vagrants
+  sudo: true
+  user: vagrant
+  tasks:
+    - name: install packages zsh
+      apt: name=zsh update_cache=yes
+- hosts: all
+  tasks:
+    - name: install python 2.7
+      raw: sudo apt-get install -y python2.7
+- hosts: all
+  become: yes
+  become_user: root
+  roles:
+    - nginx
+    - php
+    - mysql

@@ -1,0 +1,7 @@
+# dbservers Variables
+
+mysqlserver:
+  # root パスワード
+  root_password: root
+nginx:
+    home_directory: /vagrant/home

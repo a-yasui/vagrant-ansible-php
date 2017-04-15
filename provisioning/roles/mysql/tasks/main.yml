@@ -1,0 +1,35 @@
+---
+- name: Install MySQL
+  become: yes
+  apt: pkg=mysql-server state=latest
+
+- name: Install MySQL Packages
+  become: yes
+  apt: pkg="{{ item }}" state=latest
+  with_items:
+    - mysql-server
+    - mysql-client
+    - libmysqld-dev
+    - libmysqlclient-dev
+    - python-mysqldb
+
+- name: Change MySQL Root Password
+  mysql_user:
+    name: root
+    host: "{{ item }}"
+    password: "{{ mysqlserver.root_password }}"
+  with_items:
+    - 127.0.0.1
+    - ::1
+    - localhost.localdomain
+    - localhost
+  notify: restart mysqld
+
+- name: root ユーザ接続設定ファイル作成
+  template:
+    src: my.cnf.j2
+    dest: "{{ mysqlserver.defaults_file }}"
+    owner: root
+    group: root
+    mode: 0600
+  notify: restart mysqld
