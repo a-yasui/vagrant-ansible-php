@@ -15,6 +15,6 @@
   roles:
     - name: nginx
       nginx_home_directory: /vagrant/home
-    - php
-    - mysql
-    - mailcatcher
+    - name: php
+    - name: mysql
+    - name: mailcatcher
