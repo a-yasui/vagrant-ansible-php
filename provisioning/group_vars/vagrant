@@ -3,5 +3,4 @@
 mysqlserver:
   # root パスワード
   root_password: root
-nginx:
-    home_directory: /vagrant/home
+nginx_home_directory: /vagrant/home/test

@@ -16,6 +16,10 @@ Vagrant + Ansbile の試作型。
     1. ログイン: root, パス: root
 
 
+## ホームディレクトリの変更
+
+site.yml にある `nginx_home_directory` を変更してください。
+
 # License
 
 The MIT License (MIT) Copyright (c) 2016 a.yasui@gmail.com

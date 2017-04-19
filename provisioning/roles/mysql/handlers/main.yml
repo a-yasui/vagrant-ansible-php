@@ -1,13 +1,13 @@
 ---
 # handlers file for mysql
 - name: start mysqld
-  service: name=mysqld state=started
+  service: name=mysql state=started
   become: yes
 
 - name: stop mysqld
-  service: name=mysqld state=stopped
+  service: name=mysql state=stopped
   become: yes
 
 - name: restart mysqld
   become: yes
-  service: name=mysqld state=restarted
+  service: name=mysql state=restarted

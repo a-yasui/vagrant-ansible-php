@@ -13,7 +13,8 @@
   become: yes
   become_user: root
   roles:
-    - nginx
+    - name: nginx
+      nginx_home_directory: /vagrant/home
     - php
     - mysql
     - mailcatcher

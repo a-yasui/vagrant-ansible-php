@@ -6,6 +6,10 @@
 - name: Add Brightbox signing keys
   apt_key: keyserver=keyserver.ubuntu.com id=80F70E11F0F0D5F10CB20E62F5DA5F09C3173AA6
 
+- name: install upstart
+  become: yes
+  apt: pkg="upstart" state=latest
+
 - name: Add Brightbox ppa for ruby
   apt_repository: repo='ppa:brightbox/ruby-ng' update_cache=yes
   tags: [mailcatcher, packages]

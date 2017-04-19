@@ -2,6 +2,10 @@
   become: yes
   apt: pkg=nginx state=latest
 
+- name: debug
+  debug:
+    msg: "Public root: {{ nginx_home_directory }}"
+
 - name: Copy nginx default configuration
   become: yes
   template: >
