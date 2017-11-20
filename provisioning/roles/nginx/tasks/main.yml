@@ -1,3 +1,8 @@
+- name: Add Apt Repository
+  become: yes
+  apt_repository:
+    repo: "ppa:ondrej/nginx-mainline"
+
 - name: Install Nginx
   become: yes
   apt: pkg=nginx state=latest

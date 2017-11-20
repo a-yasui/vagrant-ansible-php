@@ -6,6 +6,8 @@ server {
 
     client_max_body_size 200M;
 
+    sendfile off;
+
     root  {{ nginx_home_directory }};
 
     location / {
@@ -17,10 +19,11 @@ server {
     }
 
     location ~ \.php$ {
-        fastcgi_pass unix:/var/run/php/php7.0-fpm.sock;
+    	include fastcgi_params;
+        fastcgi_pass unix:/var/run/php/php-fpm.sock;
+        fastcgi_split_path_info ^(.+\.php)(.*)$;
         fastcgi_index index.php;
         fastcgi_intercept_errors on;
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-        include fastcgi_params;
     }
 }

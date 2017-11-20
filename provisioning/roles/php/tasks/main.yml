@@ -6,25 +6,54 @@
 
 - name: Install PHP
   become: yes
-  apt: pkg=php7.0 state=latest
+  apt: pkg=php7.1 state=latest
 
 - name: install PHP packages
   become: yes
   apt: pkg="{{ item }}" state=latest
   with_items:
-    - php7.0-fpm
-    - php7.0-cli
-    - php7.0-common
-    - php7.0-curl
-    - php7.0-json
-    - php7.0-gd
-    - php7.0-mcrypt
-    - php7.0-odbc
-    - php7.0-pgsql
-    - php7.0-mbstring
-    - php7.0-mysql
-    - php7.0-xmlrpc
-    - php7.0-opcache
-    - php7.0-intl
-    - php7.0-bz2
-    - php7.0-xml
+    - php7.1-fpm
+    - php7.1-cli
+    - php7.1-common
+    - php7.1-curl
+    - php7.1-json
+    - php7.1-gd
+    - php7.1-mcrypt
+    - php7.1-odbc
+    - php7.1-pgsql
+    - php7.1-mbstring
+    - php7.1-mysql
+    - php7.1-xmlrpc
+    - php7.1-opcache
+    - php7.1-intl
+    - php7.1-bz2
+    - php7.1-xml
+    - php7.1-xdebug
+
+- name: PHP-FPM change
+  become: yes
+  template: >
+    src=php-fpm.config.j2
+    dest=/etc/php/7.1/fpm/pool.d/www.conf
+    owner=root
+    group=root
+    mode=0644
+  notify: restart php7.1
+
+- name: xdebug setup
+  become: yes
+  template: >
+    src=xdebug.ini.j2
+    dest=/etc/php/7.1/mods-available/xdebug.ini
+    owner=root
+    group=root
+    mode=0644
+  notify: restart php7.1
+
+- name: symlink to php-fpm.sock
+  file:
+    src: /var/run/php/php7.1-fpm.sock
+    dest: /var/run/php/php-fpm.sock
+    owner: root
+    group: root
+    state: link
