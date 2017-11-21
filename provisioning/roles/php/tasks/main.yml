@@ -38,7 +38,6 @@
     owner=root
     group=root
     mode=0644
-  notify: restart php7.1
 
 - name: xdebug setup
   become: yes
@@ -48,7 +47,14 @@
     owner=root
     group=root
     mode=0644
-  notify: restart php7.1
+
+- service: 
+    name: php7.1-fpm
+    state: restarted
+
+- service:
+    name: php7.1-fpm
+    enabled: yes
 
 - name: symlink to php-fpm.sock
   file:
