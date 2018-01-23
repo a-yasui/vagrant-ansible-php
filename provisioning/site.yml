@@ -18,3 +18,4 @@
     - name: php
     - name: mysql
     - name: mailcatcher
+      MAILCATCHER_HTTP_PORT: 8901

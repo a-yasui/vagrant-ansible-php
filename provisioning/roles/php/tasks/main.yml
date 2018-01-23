@@ -39,6 +39,15 @@
     group=root
     mode=0644
 
+- name: PHP Memory setup
+  become: yes
+  template: >
+    src=memory.ini.j2
+    dest=/etc/php/7.1/mods-available/memory.ini
+    owner=root
+    group=root
+    mode=0644
+
 - name: xdebug setup
   become: yes
   template: >
@@ -48,18 +57,10 @@
     group=root
     mode=0644
 
-- service: 
+- service:
     name: php7.1-fpm
     state: restarted
 
 - service:
     name: php7.1-fpm
     enabled: yes
-
-- name: symlink to php-fpm.sock
-  file:
-    src: /var/run/php/php7.1-fpm.sock
-    dest: /var/run/php/php-fpm.sock
-    owner: root
-    group: root
-    state: link
